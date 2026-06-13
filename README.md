@@ -12,6 +12,18 @@ authentication tags.
 The normative design and security requirements are defined in
 [`documentation/XXX-256-PRD.md`](documentation/XXX-256-PRD.md).
 
+## Comparison
+
+| Property | XXX-256 | AES-256 | ChaCha20 |
+| --- | --- | --- | --- |
+| Design type | Experimental AEAD | Block-cipher primitive | Stream-cipher primitive |
+| Key size | 256 bits | 256 bits | 256 bits |
+| Nonce / IV | 32-byte nonce | Mode-dependent | 96-bit nonce is common in AEAD modes |
+| Authentication tag | 32-byte built-in tag | Depends on mode | Depends on mode |
+| Internal structure | XP-1024 permutation + XD-512 keyed duplex | 128-bit block cipher | ARX-based stream cipher |
+| Rate / block handling | 64-byte rate, single-shot message processing | 16-byte block size | Byte/word stream generation |
+| Implementation profile | Portable C99, constant-time tag comparison, explicit overlap checks | Hardware-accelerated on many CPUs | Fast in software, widely deployed in AEAD form |
+
 ## Features
 
 - Portable C99 reference implementation
